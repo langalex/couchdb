@@ -134,6 +134,12 @@ couchTests.show_documents = function(debug) {
   var xhr = CouchDB.request("GET", "/test_suite_db/_design/template/_show/");
   T(xhr.status == 404, 'Should be missing');
   T(JSON.parse(xhr.responseText).reason == "Invalid path.");
+  
+  // used _shows instead of _show should return 404
+  var xhr = CouchDB.request("GET", "/test_suite_db/_design/template/_shows/");
+  T(xhr.status == 404, 'Should be missing');
+  T(JSON.parse(xhr.responseText).reason == "Invalid path.");
+  
 
   // hello template world
   xhr = CouchDB.request("GET", "/test_suite_db/_design/template/_show/hello/"+docid);
